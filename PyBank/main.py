@@ -59,11 +59,11 @@ with open(csvpath) as csvfile:
 
     print(f"Total Months: {period_count}")
 
-    print(f"Total: ${total_profit}")
+    print(f"Total: ${total_profit:,}")
 
     print(f"Average Change: ${round(average_profit_change,2)}")
 
-    print(f"Greatest Increase in Profits: {greatest_pos_month} (${greatest_pos_change})")
+    print(f"Greatest Increase in Profits: {greatest_pos_month} (${greatest_pos_change:,})")
 
-    print(f"Greatest Decrease in Profits: {greatest_neg_month} (${greatest_neg_change})")
+    print(f"Greatest Decrease in Profits: {greatest_neg_month} (${greatest_neg_change:,})")
 
