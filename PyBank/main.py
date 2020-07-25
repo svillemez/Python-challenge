@@ -7,7 +7,6 @@ import os
 # Import the module for reading CSV files
 
 import csv
-import txt
 
 # Set csvpath
 
@@ -66,27 +65,28 @@ with open(csvpath) as csvfile:
 
     print(f"Greatest Increase in Profits: {greatest_pos_month} (${greatest_pos_change:,})")
 
-    print(f"Greatest Decrease in Profits: {greatest_neg_mooutput_path = os.path.join("..", "output", "new.csv")nth} (${greatest_neg_change:,})")
+    print(f"Greatest Decrease in Profits: {greatest_neg_month} (${greatest_neg_change:,})")
 
     # Set Path for Text File
-    f = os.path.join("Analysis", "PyBank.txt")
+    file_name = os.path.join("Analysis","PyBank.txt")
 
     # Open Text File
-    f = open("PyBank.txt",'w', encoding="utf8")
+    f = open(file_name,'w', encoding="utf8")
 
     # Write Report to Text File
 
     f.write("Financial Analysis")
+    f.write("\n")
     f.write("-----------------------------------")
-
+    f.write("\n")
     f.write(f"Total Months: {period_count}")
-
+    f.write("\n")
     f.write(f"Total: ${total_profit:,}")
-
+    f.write("\n")
     f.write(f"Average Change: ${round(average_profit_change,2)}")
-
+    f.write("\n")
     f.write(f"Greatest Increase in Profits: {greatest_pos_month} (${greatest_pos_change:,})")
-
+    f.write("\n")
     f.write(f"Greatest Decrease in Profits: {greatest_neg_month} (${greatest_neg_change:,})")
 
     # Close Text File
