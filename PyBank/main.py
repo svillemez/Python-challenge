@@ -76,18 +76,18 @@ with open(csvpath) as csvfile:
 
     # Write Report to Text File
 
-    write("Financial Analysis")
-    write("-----------------------------------")
+    output_path.write("Financial Analysis")
+    output_path.write("-----------------------------------")
 
-    write(f"Total Months: {period_count}")
+    output_path.write(f"Total Months: {period_count}")
 
-    write(f"Total: ${total_profit:,}")
+    output_path.write(f"Total: ${total_profit:,}")
 
-    write(f"Average Change: ${round(average_profit_change,2)}")
+    output_path.write(f"Average Change: ${round(average_profit_change,2)}")
 
-    write(f"Greatest Increase in Profits: {greatest_pos_month} (${greatest_pos_change:,})")
+    output_path.write(f"Greatest Increase in Profits: {greatest_pos_month} (${greatest_pos_change:,})")
 
-    write(f"Greatest Decrease in Profits: {greatest_neg_month} (${greatest_neg_change:,})")
+    output_path.write(f"Greatest Decrease in Profits: {greatest_neg_month} (${greatest_neg_change:,})")
 
     # Close Text File
 
