@@ -26,11 +26,6 @@ with open(csvpath) as csvfile:
     Correy_votes = 0
     Li_votes = 0
     OTooley_votes = 0
-    
-    Khan_votes = 0
-    Correy_votes = 0
-    Li_votes = 0
-    OTooley_votes = 0
     winner_name = "     "
 
     # Read each row of data after the header
@@ -50,29 +45,15 @@ with open(csvpath) as csvfile:
         if row[2] == "O'Tooley":
             OTooley_votes += 1
         
-Khan_Percent = Khan_votes/total_votes*100
-Correy_Percent = Correy_votes/total_votes*100
-Li_Percent = Li_votes/total_votes*100
-OTooley_Percent = OTooley_votes/total_votes*100
 
+election = {
+    "Khan": Khan_votes,
+    "Correy": Correy_votes,
+    "Li": Li_votes,
+    "O'Tooley": OTooley_votes
 
-candidates [
-    "Khan",
-    "Correy",
-    "Li",
-    "O'Tooley"
-]
-votes [
-    Khan_votes,
-    Correy_votes,
-    Li_votes,
-    OTooley_votes
-]
+}
 
-for max votes[0]
-    winner_name = candidates[0]
-
-    
     # Print Summary Report
 
 print("Election Results")
@@ -80,10 +61,9 @@ print("-----------------------------------")
 print(f"Total Votes: {total_votes:,}")
 print("-----------------------------------")
 
-print(f"Khan: {round(Khan_Percent)}.000% ({Khan_votes:,})")
-print(f"Correy: {round(Correy_Percent)}.000% ({Correy_votes:,})")
-print(f"Li: {round(Li_Percent)}.000% ({Li_votes:,})")
-print(f"O'Tooley: {round(OTooley_Percent)}.000% ({OTooley_votes:,})")
+for x in election:
+    print(x[0],x[1],end="\n" )
+
 
 print("-----------------------------------")
 print(f"Winner: {winner_name}")
