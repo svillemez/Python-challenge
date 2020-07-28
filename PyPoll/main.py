@@ -31,6 +31,7 @@ with open(csvpath) as csvfile:
 
     # Set month counter and variables
     total_votes = 0
+    greatest_vote_total = 0
 
 # Create and Open Text Output File
 
@@ -47,8 +48,10 @@ with open(csvpath) as csvfile:
         candidate_choice = str(row[2])
         candidate_data[candidate_choice] = candidate_data[candidate_choice] + 1
 
-            
-# Print Summary Terminal Report Header and Total Votes
+# Sort Dictionary by Decending Vote Count
+sorted_candidate_data = sorted(candidate_data.items(), key=lambda x: (x[1]), reverse=True)
+           
+# Print Report Header and Total Votes to Terminal
 
 print("Election Results")
 print("-----------------------------------")
@@ -66,24 +69,31 @@ f.write("\n")
 f.write("-----------------------------------")
 f.write("\n")
 
-# Print and Write Election Results
+# Print Election Results to Terminal and Write Election Results to Text File
 
-for x in candidate_data:
+for x in sorted_candidate_data:
     name = str(x)
-    votes = candidate_data[x]
+    votes = int(sorted_candidate_data[x])
     percent_votes = round((votes/total_votes)*100)
-
     print(f"{name}: {percent_votes}.000% ({votes:,})")
     f.write(f"{name}: {percent_votes}.000% ({votes:,})")
     f.write("\n")
+    if votes > greatest_vote_total:
+        greatest_vote_total = votes
+        winner_name = str(x)
 
 print("-----------------------------------")
 f.write("-----------------------------------")
 
-#f.write("\n")
-#f.write(f"Winner: {winner_name}")
-#f.write("\n")
-#f.write("-----------------------------------")
+
+# Print Winner to Terminal and Write Winner to Text File 
+
+print(f"Winner: {winner_name}")
+print("-----------------------------------")
+f.write("\n")
+f.write(f"Winner: {winner_name}")
+f.write("\n")
+f.write("-----------------------------------")
 
  # Close Text File
 
