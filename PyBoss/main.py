@@ -70,20 +70,20 @@ us_state_cd = {
     'Wyoming': 'WY'
 }
 
-# Read CSV using CSV module
+# Open CSV Input File Using CSV module
 
 with open(csvpath) as csvfile:
 
-    # CSV reader specifies delimiter and variable that holds contents
+# CSV reader specifies delimiter and variable that holds contents
     csvreader = csv.reader(csvfile, delimiter=',')
 
-    # Read the header row first 
+# Read the header row first 
     csv_header = next(csvreader)
 
-# Set Path for Converted CSV File
+# Set Output File Path for Converted CSV File
     file_name = os.path.join("Analysis","employee_data_converted.csv")
 
-# Open Text File
+# Open CSV File for Output
     f = open(file_name,'w', encoding="utf8")
 
 
@@ -98,7 +98,9 @@ with open(csvpath) as csvfile:
         dob_year = (dob[4:])
         dob_day = (dob[-2:])
         dob_mo = (dob[-5:])
-        dob_converted = dob_mo + "/" + dob_day + "/" + dob_year
+        print(dob_mo)
+        print(dob_day)
+        print(dob_year)
 # convert SSN to hide all but last 4 digits
         ssn_in = str(row[3])
         last4 = ssn_in[-4:]
@@ -106,8 +108,8 @@ with open(csvpath) as csvfile:
         state = str(row[4])
         state_cd = str(us_state_cd[state])
 # write converted emplyee file
-        f.write(f"{emp_id},{first_name},{last_name},{dob_converted},{ssn},{state_cd}")
+        f.write(f"{emp_id},{first_name},{last_name},{dob_mo}/{dob_day}/{dob_year},{ssn},{state_cd}")
         f.write("\n")
 # Close Converted CSV File
 
-    f.close()
+f.close()
