@@ -10,7 +10,16 @@ import csv
 
 csvpath = os.path.join('Resources','election_data.csv')
 
-# Read using CSV module
+# Create a dictionary to store totals
+
+candidate_data = {
+"Khan":0,
+"Correy":0,
+"Li":0,
+"O'Tooley":0
+}
+
+# Read CSV using CSV module
 
 with open(csvpath) as csvfile:
 
@@ -22,62 +31,31 @@ with open(csvpath) as csvfile:
 
     # Set month counter and variables
     total_votes = 0
-    Khan_votes = 0
-    Correy_votes = 0
-    Li_votes = 0
-    OTooley_votes = 0
-    winner_name = "     "
 
-    # Read each row of data after the header
+# Create and Open Text Output File
+
+# Set Path for Text File
+    file_name = os.path.join("Analysis","PyPoll.txt")
+
+# Open Text File
+    f = open(file_name,'w', encoding="utf8")
+
+
+# Read each row of data after the header
     for row in csvreader:
-
         total_votes += 1
+        candidate_choice = str(row[2])
+        candidate_data[candidate_choice] = candidate_data[candidate_choice] + 1
 
-        if row[2] == "Khan":
-            Khan_votes += 1
             
-        if row[2] == "Correy":
-            Correy_votes += 1
-
-        if row[2] == "Li":
-            Li_votes += 1
-        
-        if row[2] == "O'Tooley":
-            OTooley_votes += 1
-        
-
-election = {
-    "Khan": Khan_votes,
-    "Correy": Correy_votes,
-    "Li": Li_votes,
-    "O'Tooley": OTooley_votes
-
-}
-
-    # Print Summary Report
+# Print Summary Terminal Report Header and Total Votes
 
 print("Election Results")
 print("-----------------------------------")
 print(f"Total Votes: {total_votes:,}")
 print("-----------------------------------")
 
-for x in election:
-    print(x[0],x[1],end="\n" )
-
-
-print("-----------------------------------")
-print(f"Winner: {winner_name}")
-print("-----------------------------------")
-
-   
-
-# Set Path for Text File
-file_name = os.path.join("Analysis","PyPoll.txt")
-
-# Open Text File
-f = open(file_name,'w', encoding="utf8")
-
-# Write Report to Text File
+# Write Report Header and Total Votes to Text File
 
 f.write("Election Results")
 f.write("\n")
@@ -88,20 +66,24 @@ f.write("\n")
 f.write("-----------------------------------")
 f.write("\n")
 
-f.write(f"Khan: {round(Khan_Percent)}.000% ({Khan_votes:,})")
-f.write("\n")
-f.write(f"Correy: {round(Correy_Percent)}.000% ({Correy_votes:,})")
-f.write("\n")
-f.write(f"Li: {round(Li_Percent)}.000% ({Li_votes:,}")
-f.write("\n")
-f.write(f"O'Tooley: {round(OTooley_Percent)}.000% ({OTooley_votes:,})")
-f.write("\n")
+# Print and Write Election Results
 
+for x in candidate_data:
+    name = str(x)
+    votes = candidate_data[x]
+    percent_votes = round((votes/total_votes)*100)
+
+    print(f"{name}: {percent_votes}.000% ({votes:,})")
+    f.write(f"{name}: {percent_votes}.000% ({votes:,})")
+    f.write("\n")
+
+print("-----------------------------------")
 f.write("-----------------------------------")
-f.write("\n")
-f.write(f"Winner: {winner_name}")
-f.write("\n")
-f.write("-----------------------------------")
+
+#f.write("\n")
+#f.write(f"Winner: {winner_name}")
+#f.write("\n")
+#f.write("-----------------------------------")
 
  # Close Text File
 
