@@ -4,7 +4,7 @@
 
 import os
 
-# Import the module for reading CSV files
+# Import the module for reading CSV files and Set CSV path
 
 import csv
 
@@ -13,8 +13,8 @@ csvpath = os.path.join('Resources','election_data.csv')
 # Create a dictionary to store totals
 
 candidate_data = {
-"Khan":0,
 "Correy":0,
+"Khan":0,
 "Li":0,
 "O'Tooley":0
 }
@@ -29,11 +29,9 @@ with open(csvpath) as csvfile:
     # Read the header row first 
     csv_header = next(csvreader)
 
-    # Set month counter and variables
+    # Set month counter and winner vote count
     total_votes = 0
     greatest_vote_total = 0
-
-# Create and Open Text Output File
 
 # Set Path for Text File
     file_name = os.path.join("Analysis","PyPoll.txt")
@@ -42,14 +40,14 @@ with open(csvpath) as csvfile:
     f = open(file_name,'w', encoding="utf8")
 
 
-# Read each row of data after the header
+# Read each row of data from CSV file and tally votes
     for row in csvreader:
         total_votes += 1
         candidate_choice = str(row[2])
         candidate_data[candidate_choice] = candidate_data[candidate_choice] + 1
 
 # Sort Dictionary by Decending Vote Count
-sorted_candidate_data = sorted(candidate_data.items(), key=lambda x: (x[1]), reverse=True)
+sorted_candidate_data = dict(sorted(candidate_data.items(), key=lambda x: (x[1]), reverse=True))
            
 # Print Report Header and Total Votes to Terminal
 
