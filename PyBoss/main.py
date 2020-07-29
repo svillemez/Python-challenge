@@ -10,7 +10,7 @@ import csv
 
 csvpath = os.path.join('Resources','employee_data.csv')
 
-#Create state abbreviation dictionary
+# Create state abbreviation dictionary
 us_state_cd = {
     'Alabama': 'AL',
     'Alaska': 'AK',
@@ -86,25 +86,24 @@ with open(csvpath) as csvfile:
 # Open CSV File for Output
     f = open(file_name,'w', encoding="utf8")
 
-
 # Read each row of data from CSV file and tally votes
     for row in csvreader:
         emp_id = str(row[0])
         name = str(row[1])
         first_name = name[:name.index(" ")]
-        last_name = name[name.index(" "):]
-# convert DOB YYYY-MM-DD to MM/DD/YYYY
+        last_name = name.partition(" ")[-1]
+# Convert DOB YYYY-MM-DD to MM/DD/YYYY
         dob = (row[2])
         dob_mo = str(dob[5:7])
         dob_day = str(dob[-2:])
         dob_year = str(dob[0:4])
-# convert SSN to hide all but last 4 digits
+# Convert SSN to hide all but last 4 digits
         ssn_in = str(row[3])
         last4 = ssn_in[-4:]
         ssn = str("***") + str("-") + str("**") + str("-") + str(last4)
         state = str(row[4])
         state_cd = str(us_state_cd[state])
-# write converted emplyee file
+# Write converted emplyee file
         f.write(f"{emp_id},{first_name},{last_name},{dob_mo}/{dob_day}/{dob_year},{ssn},{state_cd}")
         f.write("\n")
 # Close Converted CSV File
