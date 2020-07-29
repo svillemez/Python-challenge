@@ -94,13 +94,10 @@ with open(csvpath) as csvfile:
         first_name = name[:name.index(" ")]
         last_name = name[name.index(" "):]
 # convert DOB YYYY-MM-DD to MM/DD/YYYY
-        dob = str(row[2])
-        dob_year = (dob[4:])
-        dob_day = (dob[-2:])
-        dob_mo = (dob[-5:])
-        print(dob_mo)
-        print(dob_day)
-        print(dob_year)
+        dob = (row[2])
+        dob_mo = str(dob[5:7])
+        dob_day = str(dob[-2:])
+        dob_year = str(dob[0:4])
 # convert SSN to hide all but last 4 digits
         ssn_in = str(row[3])
         last4 = ssn_in[-4:]
